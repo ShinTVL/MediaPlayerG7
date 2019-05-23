@@ -13,7 +13,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RemoteViews;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -33,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     public  static String DATABASE_NAME = "dbmediaplayer.sqlite";
     String DB_PATH_SUFFIX = "/databases/";
 
-    TextView txtListSong, txtListPlaylist, txtListFSong;
+    TextView txtListSong, txtListPlaylist, txtListFSong,txtStreamingAudio;
 
     public  static SQLiteDatabase database = null;
 
@@ -69,13 +71,18 @@ public class MainActivity extends AppCompatActivity {
     public static int timeCurrent;
     public static int position;
 
-    public static String TEN_BAI_HAT, TEN_CA_SI, TOTAL_TIME;
+    public  static Boolean PlayingOnline=false,DowloadOnline=false;
+    public  static int pgbpercent=0;
+
+    public static String TEN_BAI_HAT="", TEN_CA_SI="", TOTAL_TIME;
 
     public static boolean DA_CHON_TAB_YEU_THICH = false;
 
     public static ArrayList<String> paths;
 
     public static int totaltime;
+
+    public static int repeat=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -172,6 +179,7 @@ public class MainActivity extends AppCompatActivity {
         txtListSong = (TextView)findViewById(R.id.txtlistsong);
         txtListPlaylist = (TextView)findViewById(R.id.txtlistplaylist);
         txtListFSong = (TextView) findViewById(R.id.txtlistfsong);
+        txtStreamingAudio=(TextView) findViewById(R.id.txtstreamingaudio);
         musicPlayer = new MusicPlayer();
 
         MainActivity.notificationLayout =
@@ -211,6 +219,14 @@ public class MainActivity extends AppCompatActivity {
                 DA_CHON_TAB_YEU_THICH = true;
                 Intent intent2 = new Intent(MainActivity.this,ListfavsongActivity.class);
                 startActivity(intent2);
+            }
+        });
+
+        txtStreamingAudio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent3 = new Intent(MainActivity.this,StreamingAudioActivity.class);
+                startActivity(intent3);
             }
         });
     }

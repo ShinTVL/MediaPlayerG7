@@ -4,52 +4,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_weight="1"
     android:orientation="vertical"
-    tools:context=".SonginplaylistActivity">
+    tools:context=".ListsongActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#FF373CDC"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/txturl"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:text="URL"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
-                android:layout_marginBottom="7dp"
-                app:srcCompat="@drawable/back" />
+        <EditText
+            android:id="@+id/edturl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:maxLines="1"></EditText>
 
-            <TextView
-                android:id="@+id/tvTieuDe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingLeft="5dp"
-                android:text="TextView"
-                android:textColor="@color/white"
-                android:textSize="15dp" />
-        </LinearLayout>
+
+
+
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnchinhsuapl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Thêm bài hát vào playlist" />
-
-    <ListView
-        android:id="@+id/listsonginpl"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnplay"
+            android:layout_width="149dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Play" />
+
+        <Button
+            android:id="@+id/btndowload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Dowload" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/pgbdowload" />
+    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -181,4 +198,5 @@
 
         </LinearLayout>
     </LinearLayout>
+
 </LinearLayout>

@@ -32,6 +32,8 @@ public class ListsongActivity extends AppCompatActivity implements AdapterView.O
     ListView lvBaiHatGoc;
     ArrayList<Music> dsBaiHatGoc;
     MusicAdapter adapterBaiHatGoc;
+    TextView tvTieuDe;
+    ImageView imgBack;
     //
 
     @Override
@@ -66,6 +68,10 @@ public class ListsongActivity extends AppCompatActivity implements AdapterView.O
         adapterBaiHatGoc = new MusicAdapter(ListsongActivity.this,R.layout.itemlistsong,dsBaiHatGoc);
         lvBaiHatGoc.setAdapter(adapterBaiHatGoc);
 
+        tvTieuDe = (TextView)findViewById(R.id.tvTieuDe);
+        tvTieuDe.setText("Danh sách bài hát");
+        imgBack = (ImageView)findViewById(R.id.imageView4);
+
         initViews();
 
         if (KiemTraLanDauChayApp()) { //nếu lần đầu tiên chạy app thì mới quét điện thoại
@@ -86,6 +92,12 @@ public class ListsongActivity extends AppCompatActivity implements AdapterView.O
 
     private void AddEvents() {
         initListeners();
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 
     private void initListeners() {
@@ -290,7 +302,18 @@ public class ListsongActivity extends AppCompatActivity implements AdapterView.O
             case R.id.iv_next:
                 nextMusic();
                 break;
-
+            case R.id.iv_repeat:
+                if (MainActivity.repeat==0)
+                {
+                    Toast.makeText(this, "Bạn đã chọn lặp lại bài hát", Toast.LENGTH_SHORT).show();
+                    MainActivity.repeat=1;
+                }
+                else
+                {
+                    Toast.makeText(this, "Bạn bỏ chọn lặp lại bài hát", Toast.LENGTH_SHORT).show();
+                    MainActivity.repeat=0;
+                }
+                break;
             case R.id.iv_play:
                 if (MainActivity.musicPlayer.getState() == PLAYER_PLAY) {
                     MainActivity.ivPlay.setImageResource(R.drawable.play);
@@ -365,6 +388,10 @@ public class ListsongActivity extends AppCompatActivity implements AdapterView.O
 
     private void nextMusic() {
         MainActivity.position++;
+        if (MainActivity.repeat==1)
+        {
+            MainActivity.position--;
+        }
         if (MainActivity.position >= MainActivity.paths.size()) {
             MainActivity.position = 0;
         }
